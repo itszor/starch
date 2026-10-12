@@ -1,0 +1,49 @@
+{
+ "name": "starch",
+ "title": "Starch (Alien Images, 1990)",
+ "platform": "acorn-archimedes",
+ "doc": "A recipe: how to turn a user's own copy of the game into a native executable. It holds no game data: the inputs are recognised by content (see $SS/tools/weave.py).",
+ "inputs": {
+  "containers": {
+   "Starch (1990)(Alien Images).zip": "c594afe7b8652db3402c2ee8e1c4868749b4542312023cbd6ce6ff957793a202"
+  },
+  "formats": [
+   "zip",
+   "adf"
+  ]
+ },
+ "discs": [
+  {
+   "name": "disc1",
+   "title": "Starch (the program is in sectors no file owns: the image itself is kept, and tools/unpack.py checks what it gets from it)",
+   "known_images": [
+    "f3a27909c7630b394f1702b639d6d538e845063b04cbc6fcd3b5c30b37bf2894"
+   ],
+   "key_files": {
+    "!Boot": "6a60f5f64672007fe9b67876e0a66816a9f06001b2737f894f3b7d1623805733",
+    "!Starch/!STARCH": "3dd2d0be08fe790428ba349256f486d17697e3862c5738159d9999dc9bc96459",
+    "!Starch/!RUN": "1b6c477d14da489b7a90914db1cc2eb0e0ebee52da387764013e3585fbe9f687"
+   },
+   "raw": true,
+   "game_dirs": []
+  }
+ ],
+ "build": [
+  "python3 -I \"$WEAVE\" extract . INPUTS",
+  "mkdir -p unpacked && python3 -I tools/unpack.py extracted/disc1.img unpacked/starch",
+  "make -C recomp regen",
+  "make -C recomp"
+ ],
+ "output": "recomp/starch",
+ "requires": {
+  "superspider": "~/stuff/superspider, or $SUPERSPIDER (dune build): analyse, gen, tools/weave.py",
+  "libroger": "~/stuff/libroger, or make ROGER=...",
+  "host": [
+   "python3",
+   "ocaml + dune",
+   "gcc",
+   "SDL3 (pkg-config sdl3)"
+  ]
+ },
+ "run": "cd recomp && ./starch"
+}

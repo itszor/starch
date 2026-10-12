@@ -1,0 +1,31 @@
+# Starch's level code: entered only through the slot at &8E18C, which the
+# game fills with the current level's 256-byte header (copied from
+# &8100 + level * &100). Each header starts with branches - at +0, +8, +&C
+# and +&10 - to its level's routines; these are their targets as the slot
+# places them. SuperSpider sees the copy (a slot: source unknown) but not
+# what goes into it.
+# level 1
+8e3b8
+91dc0
+91ca4
+8e3d8
+# level 2
+91e88
+94e04
+94cc0
+91eb8
+# level 3
+94f4c
+97ed8
+97d48
+94f88
+# level 4
+97f3c
+9aca0
+9ab28
+97f74
+# level 5
+9ad40
+9e0a4
+9df14
+9ad84
